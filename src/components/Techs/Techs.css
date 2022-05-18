@@ -75,9 +75,17 @@
     }
 }
 
-@media screen and (max-width: 322px) {
+@media screen and (max-width: 670px) {
+    .tech__grid {
+        grid-template-columns: repeat(5, 84px);
+        grid-template-rows: auto;
+    }
+}
+
+@media screen and (max-width: 480px) {
     .tech {
         padding: 60px 0 70px 0;
+        background: #202020;
     }
     .tech__paragraph {
         padding-top: 60px;
@@ -93,5 +101,7 @@
     .tech__grid {
         grid-template-columns: repeat(2, 84px);
     }
-    
+    .tech__title {
+        border-bottom: 1px solid rgba(0, 0, 0, 1);
+    }
 }

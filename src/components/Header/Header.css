@@ -19,7 +19,7 @@
     }
 }
 
-@media screen and (max-width: 322px) {
+@media screen and (max-width: 340px) {
     .header__nav {
         padding: 18px 14px;
     }

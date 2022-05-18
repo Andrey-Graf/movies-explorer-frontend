@@ -110,7 +110,7 @@
     }
 }
 
-@media screen and (max-width: 322px) {
+@media screen and (max-width: 480px) {
     .student {
         padding-top: 70px;
     }

@@ -21,6 +21,11 @@ function Movies() {
                 buttonClassName={buttonLike}
                 onCardClick={handleLike}
             />
+            <div className='movies__btn-block'>
+                <button className='movies-card__list-btn' type='button'>
+                    Ещё
+                </button>
+            </div>
             <Footer />
         </section>
     )

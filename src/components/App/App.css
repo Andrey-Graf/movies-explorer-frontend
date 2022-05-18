@@ -60,19 +60,19 @@
     opacity: .6;
 }
 
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 770px) {
     .title {
         max-width: 668px;
     }
 }
 
-@media screen and (max-width: 322px) {
+@media screen and (max-width: 340px) {
     .text {
         font-size: 11px;
         line-height: 13px;
     }
     .title {
-        max-width: 284px;
+        width: 284px;
         padding-bottom: 28px;
         font-size: 18px;
         line-height: 22px;

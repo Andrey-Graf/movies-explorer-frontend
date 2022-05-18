@@ -61,13 +61,15 @@
     }
 }
 
-@media screen and (max-width: 322px) {
+@media screen and (max-width: 420px) {
     .form_theme_dark {
         padding: 56px 30px 30px 30px;
     }
     .form__button-save {
         margin-top: 240px;
         max-width: 260px;
+        font-size: 12px;
+        line-height: 15px;
     }
     .form__title {
         margin: 50px 0 80px

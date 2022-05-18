@@ -11,9 +11,6 @@ function MoviesCardList(props) {
                     onCardClick={props.onCardClick}
                 />
             </ul>
-            <button className='movies-card__list-btn' type='button'>
-                Ещё
-            </button>
         </section>
     )
 };

@@ -18,6 +18,7 @@ function SearchForm() {
                             autoComplete="off"
                             minLength="2"
                             maxLength="200"
+                            required
                         />
                         <span className="form__input-error" id="profile-movi-error"></span>
                         <button className='search__button' type='submit'><img className='search__icon' src={IconSearch} alt='поиск' /></button>

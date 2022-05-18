@@ -79,12 +79,6 @@
 }
 
 @media screen and (max-width: 769px) {
-    
-}
-
-
-
-@media screen and (max-width: 769px) {
     .portfolio {
         padding-bottom: 90px;
     }
@@ -99,7 +93,7 @@
     }
 }
 
-@media screen and (max-width: 322px) {
+@media screen and (max-width: 480px) {
     .portfolio {
         padding-bottom: 70px;
     }

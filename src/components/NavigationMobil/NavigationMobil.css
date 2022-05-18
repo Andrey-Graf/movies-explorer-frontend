@@ -14,7 +14,9 @@
 }
 
 .mobil__button-close {
-    margin: 22.44px 22.44px 0 0;
+    position: absolute;
+    top: 22.44px;
+    right: 22.44px;
     background: url(../../images/movies-mine-close.svg);
     background-repeat: no-repeat;
     background-position: center;
@@ -57,7 +59,7 @@
 
 .mobil__block {
     width: 340px;
-    padding: 36.44px 90px 92px 90px;
+    padding: 159px 90px 92px 90px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -113,18 +115,22 @@
     }
 }
 
-@media screen and (max-width: 322px) {
+@media screen and (max-width: 346px) {
     .mobil__container {
         width: 320px;
     }
     .mobil__block {
         width: 300px;
-        padding: 99.44px 10px 48px 10px;
+        padding: 144px 0 48px 0;
     }
     .mobil__link {
         margin-top: 24px;
     }
     .mobil__profile {
         margin-top: 444px;
+    }
+    .mobil__button-close {
+        top: 13.44px;
+        right: 13.44px;
     }
 }
