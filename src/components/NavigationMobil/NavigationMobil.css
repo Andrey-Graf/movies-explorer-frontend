@@ -1,0 +1,130 @@
+.mobil__menu {
+    display: none;
+}
+
+.mobil__button-menu {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: unset;
+    background: url(../../images/movies-main.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+.mobil__button-close {
+    margin: 22.44px 22.44px 0 0;
+    background: url(../../images/movies-mine-close.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 22px;
+    height: 22px;
+    border: none;
+    cursor: pointer;
+}
+
+.mobil__button-menu:hover {
+    opacity: .6;
+}
+
+.mobil__button-close:hover {
+    opacity: .6;
+}
+
+.mobil__container {
+    font-family: 'inter', 'Helvetica Neue', Arial, sans-serif;
+    font-style: normal;
+    visibility: hidden;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    top: 0;
+    right: 0;
+    transition: all 0.5s, opacity 0.5s linear;
+    width: 520px;
+    height: 100vh;
+    background: #202020;
+    opacity: 0;
+}
+
+.mobil__container_opened {
+    visibility: visible;
+    opacity: 1;
+    z-index: 1;
+}
+
+.mobil__block {
+    width: 340px;
+    padding: 36.44px 90px 92px 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mobil__link {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    color: #FFFFFF;
+    cursor: pointer;
+    margin-top: 28px;
+}
+
+.mobil__link:first-child {
+    margin-top: 0;
+}
+
+.mobil__link-activ {
+    border-bottom: 2px solid #FFFFFF;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.mobil__profile {
+    display: flex;
+    align-items: center;
+    margin-top: 621px;
+}
+
+.mobil__profile-link{
+    margin-right: 13px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+}
+
+.mobil__profile-icon {
+    padding: 9.75px 9.81px 9.58px 9.81px;
+    width: 10.38px;
+    height: 10.67px;
+    background-image: url(../../images/border-icon.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+@media screen and (max-width: 770px) {
+    .mobil__menu {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+@media screen and (max-width: 322px) {
+    .mobil__container {
+        width: 320px;
+    }
+    .mobil__block {
+        width: 300px;
+        padding: 99.44px 10px 48px 10px;
+    }
+    .mobil__link {
+        margin-top: 24px;
+    }
+    .mobil__profile {
+        margin-top: 444px;
+    }
+}

@@ -1,0 +1,15 @@
+.movies__header {
+    padding: 18px 70px;
+}
+
+@media screen and (max-width: 770px) {
+    .movies__header {
+        padding: 18px 30px;
+    }
+}
+
+@media screen and (max-width: 322px) {
+    .movies__header {
+        padding: 18px 14px;
+    }
+}

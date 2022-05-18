@@ -1,0 +1,145 @@
+.student {
+    position: relative;
+    margin: 0 auto;
+    padding-top: 110px;
+    max-width: 1280px;
+    min-width: 320px;
+    background: #202020;
+    font-family: 'inter', 'Helvetica Neue', Arial, sans-serif;
+    font-style: normal;
+}
+
+.student__info {
+    padding: 66px 70px 100px 70px;
+    display: grid;
+    grid-template-columns: 1fr 270px;
+    justify-content: end;
+}
+
+.student__card {
+    position: relative;
+    max-width: 600px;
+}
+
+.student__paragraph {
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    letter-spacing: -0.04em;
+    color: #FFFFFF;
+}
+
+.student__subtitle {
+    margin: 18px 0 26px 0;
+    padding: 0;
+    font-weight: 500;       
+    font-size: 18px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+
+.student__text {
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: #FFFFFF;
+}
+
+.student__list {
+    margin: 121px 0 0 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 66px 46px;
+    gap: 20px;
+    padding: 0;
+    align-self: end;
+}
+
+.student__link {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+}
+
+.student__img {
+    max-width: 270px;
+    max-height: 327px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    justify-self: end;
+}
+
+@media screen and (max-width: 769px) {
+    .student {
+        padding-top: 90px;
+    }
+    .student__info {
+        padding: 66px 50px 90px 50px;
+        grid-template-columns: 1fr 255px;
+    }
+    .student__card {
+        max-width: 364px;
+    }
+    .student__paragraph{
+        font-size: 40px;
+        line-height: 40px;
+    }
+    .student__subtitle {
+        margin: 16px 0 20px 0;
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .student__text {
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .student__list {
+        margin-top: 105px;
+    }
+    .student__img {
+        max-width: 255px;
+        max-height: 307px;
+    }
+}
+
+@media screen and (max-width: 322px) {
+    .student {
+        padding-top: 70px;
+    }
+    .student__info {
+        padding: 60px 14px 70px 14px;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, auto);
+        gap: 40px;
+    }
+    .student__paragraph {
+        font-size: 30px;
+        line-height: 36px;
+    }
+    .student__subtitle {
+        margin-top: 20px;
+        font-size: 11px;
+        line-height: 16px;
+    }
+    .student__text {
+        font-size: 11px;
+        line-height: 16px;
+    }
+    .student__list {
+        margin-top: 72px;
+        gap: 26px;
+    }
+    .student__img {
+        max-width: 292px;
+        max-height: 352px;
+        grid-row-start: 1;
+    }
+}
