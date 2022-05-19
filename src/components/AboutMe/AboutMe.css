@@ -1,7 +1,6 @@
 .student {
     position: relative;
     margin: 0 auto;
-    padding-top: 110px;
     max-width: 1280px;
     min-width: 320px;
     background: #202020;
@@ -9,8 +8,12 @@
     font-style: normal;
 }
 
+.student__section {
+    padding: 110px 70px 0 70px;
+}
+
 .student__info {
-    padding: 66px 70px 100px 70px;
+    padding: 66px 0 100px 0;
     display: grid;
     grid-template-columns: 1fr 270px;
     justify-content: end;
@@ -78,11 +81,11 @@
 }
 
 @media screen and (max-width: 769px) {
-    .student {
-        padding-top: 90px;
+    .student__section {
+        padding: 90px 50px 0 50px;
     }
     .student__info {
-        padding: 66px 50px 90px 50px;
+        padding: 66px 0 90px 0;
         grid-template-columns: 1fr 255px;
     }
     .student__card {
@@ -111,11 +114,11 @@
 }
 
 @media screen and (max-width: 480px) {
-    .student {
-        padding-top: 70px;
+    .student__section {
+        padding: 70px 14px 0 14px;
     }
     .student__info {
-        padding: 60px 14px 70px 14px;
+        padding: 60px 0 70px 0;
         grid-template-columns: 1fr;
         grid-template-rows: repeat(2, auto);
         gap: 40px;

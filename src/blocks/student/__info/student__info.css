@@ -1,0 +1,22 @@
+.student__info {
+    padding: 66px 70px 100px 70px;
+    display: grid;
+    grid-template-columns: 1fr 270px;
+    justify-content: end;
+}
+
+@media screen and (max-width: 769px) {
+    .student__info {
+        padding: 66px 50px 90px 50px;
+        grid-template-columns: 1fr 255px;
+    }
+}
+
+@media screen and (max-width: 322px) {
+    .student__info {
+        padding: 60px 14px 70px 14px;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, auto);
+        gap: 40px;
+    }
+}

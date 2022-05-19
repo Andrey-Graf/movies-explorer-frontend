@@ -1,0 +1,15 @@
+.tech__icon {
+    max-width: 90px;
+    height: 60px;
+    background-image: url(../../../images/tech-icon.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 769px) {
+    .tech__icon {
+        max-width: 84px;
+        height: 57px;
+    }
+}

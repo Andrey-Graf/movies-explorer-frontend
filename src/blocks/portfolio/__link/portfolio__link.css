@@ -1,0 +1,27 @@
+.portfolio__link {
+    width: 29px;
+    height: 60px;
+    background-image: url(../../../images/portfolio-link.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #FFFFFF;
+    cursor: pointer;
+    text-decoration: unset;
+}
+
+.portfolio__link:hover {
+    opacity: .6;
+}
+
+@media screen and (max-width: 769px) {
+    .portfolio__link {
+        width: 27px;
+    }
+}
+
+@media screen and (max-width: 322px) {
+    .portfolio__link {
+        width: 18px;
+        height: 28px;
+    }
+}

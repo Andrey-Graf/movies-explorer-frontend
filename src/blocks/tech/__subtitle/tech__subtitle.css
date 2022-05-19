@@ -1,0 +1,30 @@
+.tech__subtitle {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 26px 0 100px 0;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    color: #FFFFFF;
+}
+
+@media screen and (max-width: 769px) {
+    .tech__subtitle {
+        padding: 22px 0 83px 0;
+        font-size: 12px;
+        line-height: 18px;
+    }
+}
+
+@media screen and (max-width: 322px) {
+    .tech__subtitle {
+        max-width: 292px;
+        padding: 24px 0 50px 0;
+        font-size: 11px;
+        line-height: 16px;
+    }
+}

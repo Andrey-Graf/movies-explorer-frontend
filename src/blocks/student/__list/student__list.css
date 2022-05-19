@@ -1,0 +1,22 @@
+.student__list {
+    margin: 121px 0 0 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 66px 46px;
+    gap: 20px;
+    padding: 0;
+    align-self: end;
+}
+
+@media screen and (max-width: 769px) {
+    .student__list {
+        margin-top: 105px;
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .student__list {
+        margin-top: 72px;
+        gap: 26px;
+    }
+}

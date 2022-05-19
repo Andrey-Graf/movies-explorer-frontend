@@ -1,0 +1,25 @@
+.text-grid__subtitle {
+    margin: 26px 0 0 0;
+    font-family: 'inter', 'Helvetica Neue', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+
+@media screen and (max-width: 769px) {
+    .text-grid__subtitle {
+        font-size: 12px;
+        line-height: 18px;
+        margin-top: 22px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .text-grid__subtitle {
+        font-size: 11px;
+        line-height: 16px;
+        margin-top: 16px;
+    }
+}

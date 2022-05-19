@@ -1,0 +1,10 @@
+.student__card {
+    position: relative;
+    max-width: 600px;
+}
+
+@media screen and (max-width: 769px) {
+    .student__card {
+        max-width: 364px;
+    }
+}

@@ -1,0 +1,26 @@
+.student__subtitle {
+    margin: 18px 0 26px 0;
+    padding: 0;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 500;       
+    font-size: 18px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+
+@media screen and (max-width: 769px) {
+    .student__subtitle {
+        margin: 16px 0 20px 0;
+        font-size: 12px;
+        line-height: 18px;
+    }
+}
+
+@media screen and (max-width: 322px) {
+    .student__subtitle {
+        margin-top: 20px;
+        font-size: 11px;
+        line-height: 16px;
+    }
+}

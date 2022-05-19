@@ -1,0 +1,21 @@
+.text-grid {
+    margin: 0 auto;
+    padding: 110px 70px 110px 70px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+}
+
+@media screen and (max-width: 769px) {
+    .text-grid {
+        padding: 70px 50px 93px 50px;
+        gap: 30px
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .text-grid {
+        padding: 60px 18px 60px 18px;
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,9 @@
+.about__back-end {
+    max-width: 228px;
+    max-height: 36px;
+    width: 100%;
+    height: 100%;
+    background-image: url(../../..//images/about_main-1.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}

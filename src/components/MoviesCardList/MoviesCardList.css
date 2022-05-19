@@ -1,7 +1,7 @@
 .movies-card__list {
     max-width: 1140px;
     margin: 0 auto;
-    padding: 50px 0 0 0;
+    padding: 50px 70px 10px 70px;
     display: flex;
     flex-direction: column;
     align-items: center;

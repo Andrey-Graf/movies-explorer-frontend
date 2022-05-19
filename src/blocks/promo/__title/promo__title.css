@@ -1,0 +1,15 @@
+.promo__title {
+    padding: 50px 70px 60px 70px;
+}
+
+@media screen and (max-width: 769px) {
+    .promo__title {
+        padding: 300px 44px 70px 44px;
+    }
+}
+
+@media screen and (max-width: 321px) {
+    .promo__title {
+        padding: 183px 10px 40px 10px;
+    }
+}

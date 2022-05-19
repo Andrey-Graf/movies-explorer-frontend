@@ -22,13 +22,17 @@ function Navigation(props) {
                     <div className='movies__nav'>
                         <Logo />
                         <div className='movies__block'>
-                            <Link className='link movies__link' to='/movies'>Филмы</Link>
+                            <Link className='link movies__link' to='/movies'>Фильмы</Link>
                             <Link className='link movies__link' to='/saved-movies'>Сохранённые фильмы</Link>
                         </div>
                     </div>
                     <div className='movies__profile'>
-                        <Link className='link movies__profile-link' to='/profile'>Аккаунт</Link>
-                        <img src={Icon} className='movies__profile-icon' alt='Иконка' />
+                        <Link className='link link__profile' to='/profile'>
+                            <button className='link__button' type='button'>
+                                <p className='link__button-text'>Аккаунт</p>
+                                <img src={Icon} className='movies__profile-icon' alt='Иконка' />
+                            </button>
+                        </Link>
                     </div>
                 </div>
             )}

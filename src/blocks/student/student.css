@@ -1,0 +1,20 @@
+.student {
+    position: relative;
+    margin: 0 auto;
+    padding-top: 110px;
+    max-width: 1280px;
+    min-width: 320px;
+    background: #000;
+}
+
+@media screen and (max-width: 769px) {
+    .student {
+        padding-top: 90px;
+    }
+}
+
+@media screen and (max-width: 322px) {
+    .student {
+        padding-top: 70px;
+    }
+}

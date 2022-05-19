@@ -1,0 +1,16 @@
+.header__button_text {
+    margin: 0;
+    padding: 8px 20px 8px 20px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+@media screen and (max-width: 320px) {
+    .header__button_text {
+        padding: 5px 12px 5px 12px;
+        font-size: 10px;
+    }
+}

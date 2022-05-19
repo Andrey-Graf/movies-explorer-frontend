@@ -1,0 +1,20 @@
+.about__box {
+    padding: 0 70px 0 70px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 228px auto;
+}
+
+@media screen and (max-width: 769px) {
+    .about__box {
+        padding: 0 50px 0 50px;
+        grid-template-columns: 140px auto;
+    }
+}
+
+@media screen and (max-width: 322px) {
+    .about__box {
+        padding: 0 18px 0 18px;
+        grid-template-columns: 100px auto;
+    }
+}

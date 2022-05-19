@@ -5,6 +5,7 @@ import './AboutMe.css'
 function AboutMe() {
     return (
         <section className="student">
+            <div className="student__section">
                 <h2 className="title student__title">Студент</h2>
                 <div className="student__info">
                     <div className="student__card">
@@ -20,7 +21,8 @@ function AboutMe() {
                     </div>
                     <img src={studentImg} alt="Студент" className="student__img" />
                 </div>
-            </section>
+            </div>
+        </section>
     )
 };
 

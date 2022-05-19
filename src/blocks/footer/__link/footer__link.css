@@ -1,0 +1,16 @@
+.footer__link {
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 322px) {
+    .footer__link {
+        font-size: 12px;
+        line-height: 15px;
+    }
+}

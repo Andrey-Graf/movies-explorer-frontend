@@ -1,0 +1,26 @@
+.tech__paragraph {
+    padding-top: 90px;
+    margin: 0 auto;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    color: #FFFFFF;
+}
+
+@media screen and (max-width: 769px) {
+    .tech__paragraph {
+        padding-top: 80px;
+    }
+}
+
+@media screen and (max-width: 322px) {
+    .tech__paragraph {
+        padding-top: 60px;
+        font-size: 30px;
+        line-height: 36px;
+    }
+}
