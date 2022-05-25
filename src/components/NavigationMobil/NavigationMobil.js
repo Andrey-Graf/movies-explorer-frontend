@@ -18,7 +18,7 @@ function NavigationMobil(props) {
     const menuClassName = (`mobil__container ${isMenuOpen ? 'mobil__container_opened' : ''}`);
     return (
         <>
-            {props.loggedin && (
+            {props.loggedIn && (
                 <div className='mobil__menu'>
                     <Logo />
                     <button className='mobil__button-menu'
