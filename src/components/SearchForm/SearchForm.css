@@ -67,7 +67,6 @@
 }
 
 .form__input-error {
-    border-bottom: 1px solid #EE3465;
     font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     font-style: normal;
     font-weight: 400;

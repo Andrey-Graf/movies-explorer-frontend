@@ -46,8 +46,7 @@
     color: #8B8B8B;
 }
 
-.form__text_type_error {
-    border-bottom: 1px solid #EE3465;
+.form__input-error {
     font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     font-style: normal;
     font-weight: 400;
