@@ -3,14 +3,43 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import IconSearch from '../../images/button-search.svg'
 import './SearchForm.css';
 
-function SearchForm() {
+function SearchForm({ searchMovie, setIsChecked }) {
+    const [searchText, setSearchText] = React.useState('');
+    const [shortMovies, setShortMovies] = React.useState(false);
+    const [error, setError] = React.useState('');
+
+    React.useEffect(() => {
+        setError('');
+    }, [searchText]);
+
+    function onCheckbox(checked) {
+        setShortMovies(checked);
+        setIsChecked(!shortMovies);
+    }
+
+    function onChange(e) {
+        setSearchText(e.target.value);
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        if (!searchMovie) {
+            setError('Нужно ввести ключевое слово');
+            return;
+        }
+
+        searchMovie(searchText);
+    }
     return (
         <section className='search'>
             <div className='search__conteiner'>
-                <form className='search__form'>
+                <form className='search__form' onSubmit={handleSubmit}>
                     <div className='search__input-block'>
                         <input
                             className='search__input'
+                            value={searchText}
+                            onChange={onChange}
                             type="text"
                             name="movi"
                             id="search-movi"
@@ -20,10 +49,10 @@ function SearchForm() {
                             maxLength="200"
                             required
                         />
-                        <span className="form__input-error" id="profile-movi-error"></span>
+                        <span className="form__input-error" id="profile-movi-error">{error}</span>
                         <button className='search__button' type='submit'><img className='search__icon' src={IconSearch} alt='поиск' /></button>
                     </div>
-                    <FilterCheckbox />
+                    <FilterCheckbox onCheckbox={onCheckbox}/>
                 </form>
             </div>
         </section>

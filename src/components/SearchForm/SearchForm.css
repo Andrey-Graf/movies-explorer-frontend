@@ -51,6 +51,11 @@
     border: none;
     background: none;
     padding: 0;
+    cursor: pointer;
+}
+
+.search__button:hover {
+    opacity: .6;
 }
 
 .search__icon {
@@ -59,6 +64,17 @@
     color: #FFFFFF;
     padding: 0;
     object-fit: cover;
+}
+
+.form__input-error {
+    border-bottom: 1px solid #EE3465;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    margin-top: 6px;
+    color: #EE3465;
 }
 
 @media screen and (max-width: 770px) {

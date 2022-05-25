@@ -1,25 +1,47 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import HeaderMovies from '../HeaderMovies/HeaderMovies';
 import SearchForm from '../SearchForm/SearchForm';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import SavedCardList from '../SavedCardList/SavedCardList';
 import Footer from '../Footer/Footer';
 import './SavedMovies.css';
 
-function SavedMovies() {
-    const [isDelete, setIsDelete] = React.useState(false);
-
-    function handleDelete() {
-        setIsDelete(!isDelete);
+function SavedMovies({
+    loggedIn,
+    isLoading,
+    message,
+    savedMovies,
+    movieUnSave,
+    searchSavedMovie,
+    foundSavedMovies,
+    sortShortMovies,
+}) {
+    const [shortMovies, setShortMovies] = React.useState([]);
+    const [isChecked, setIsChecked] = React.useState(false);
+    
+    let movies = foundSavedMovies.length > 0 ? foundSavedMovies : savedMovies;
+    if (message) {
+        movies = [];
     }
 
-    const buttonLike = "movies-card__delete-button";
+    React.useEffect(() => {
+        if (isChecked && !message) {
+            setShortMovies(sortShortMovies(movies));
+        }
+    }, [isChecked, movies]);
+
     return (
         <section className='saved-movies'>
-            <HeaderMovies />
-            <SearchForm />
-            <MoviesCardList
-                buttonClassName={buttonLike}
-                onCardClick={handleDelete}
+            <HeaderMovies loggedIn={loggedIn} />
+            <SearchForm
+                searchMovie={searchSavedMovie}
+                setIsChecked={setIsChecked}
+            />
+            <SavedCardList
+                isLoading={isLoading}
+                savedMovies={isChecked ? shortMovies : movies}
+                message={message}
+                movieUnSave={movieUnSave}
             />
             <Footer />
         </section>

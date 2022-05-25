@@ -5,21 +5,3 @@
     font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     font-style: normal;
 }
-
-.movies-card__delete-button {
-    position: relative;
-    padding: 0;
-    max-width: 30px;
-    max-height: 30px;
-    width: 100vw;
-    height: 100vh;
-    background: none;
-    border: none;
-    box-sizing: border-box;
-    background-image: url(../../images/movies-delet.svg);
-    background-repeat: no-repeat;
-    background-position: 50%;
-    background-size: cover;
-    cursor: pointer;
-    align-self: center;
-}

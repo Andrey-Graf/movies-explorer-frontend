@@ -3,14 +3,14 @@ import Navigation from '../Navigation/Navigation';
 import NavigationMobil from '../NavigationMobil/NavigationMobil';
 import './HeaderMovies.css';
 
-function HeaderMovies({ loggedin }) {
+function HeaderMovies({ loggedIn }) {
     return (
         <div className='movies__header'>
             <Navigation
-                loggedin={!loggedin}
+                loggedIn={loggedIn}
             />
             <NavigationMobil
-                loggedin={!loggedin}
+                loggedIn={loggedIn}
             />
         </div>
     )

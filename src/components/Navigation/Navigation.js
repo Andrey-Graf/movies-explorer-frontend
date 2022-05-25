@@ -7,7 +7,7 @@ import './Navigation.css';
 function Navigation(props) {
     return (
         <>
-            {!props.loggedin && (
+            {!props.loggedIn && (
                 <div className="header__menu">
                     <Link className="link header__link" to="/signup">Регистрация</Link>
                     <Link to="/signin">
@@ -17,7 +17,7 @@ function Navigation(props) {
                     </Link>
                 </div>
             )}
-            {props.loggedin && (
+            {props.loggedIn && (
                 <div className='movies__menu'>
                     <div className='movies__nav'>
                         <Logo />

@@ -53,6 +53,15 @@
     border: none;
 }
 
+.form__button-save:hover {
+    opacity: .6;
+}
+
+.form__button-disabled {
+    background-color: #F8F8F8;
+    color: #C2C2C2;
+}
+
 @media screen and (max-width: 769px) {
     .form_theme_dark {
         padding: 232px 0 232px 0;

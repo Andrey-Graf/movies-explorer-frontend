@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import HeaderMovies from '../HeaderMovies/HeaderMovies';
 import SearchForm from '../SearchForm/SearchForm';
@@ -5,27 +6,42 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from "../Footer/Footer";
 import './Movies.css';
 
-function Movies() {
-    const [isLike, setIsLike] = React.useState(false);
+function Movies({
+    loggedIn,
+    message,
+    movies,
+    isLoading,
+    searchMovie,
+    savedMovies,
+    movieUnSave,
+    movieSave,
+    sortShortMovies,
+}) {
 
-    function handleLike() {
-        setIsLike(!isLike);
-    }
+    const [shortMovies, setShortMovies] = React.useState([]);
+    const [isChecked, setIsChecked] = React.useState(false);
 
-    const buttonLike = (`movies-card__like-button ${isLike ? 'movies-card__like-button_activ' : ''}`);
+    React.useEffect(() => {
+        if (isChecked) {
+            setShortMovies(sortShortMovies(movies));
+        }
+    }, [isChecked]);
+
     return (
         <section className='movies'>
-            <HeaderMovies />
-            <SearchForm />
-            <MoviesCardList
-                buttonClassName={buttonLike}
-                onCardClick={handleLike}
+            <HeaderMovies loggedIn={loggedIn} />
+            <SearchForm
+                searchMovie={searchMovie}
+                setIsChecked={setIsChecked}
             />
-            <div className='movies__btn-block'>
-                <button className='movies-card__list-btn' type='button'>
-                    Ещё
-                </button>
-            </div>
+            <MoviesCardList
+                isLoading={isLoading}
+                message={message}
+                movies={isChecked ? shortMovies : movies}
+                savedMovies={savedMovies}
+                movieUnSave={movieUnSave}
+                movieSave={movieSave}
+            />
             <Footer />
         </section>
     )

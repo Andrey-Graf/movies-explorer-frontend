@@ -1,0 +1,124 @@
+.saved-card__element {
+    position: relative;
+    max-width: 364px;
+    width: 100%;
+    margin: 0;
+    background: #222222;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    overflow: hidden;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-style: normal;
+}
+
+.saved-card__figure {
+    max-width: 364px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.saved-card__image {
+    max-height: 203px;
+    width: 100%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.saved-card__group {
+    padding: 16px 16px 17px 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.saved-card__caption {
+    margin: 0;
+    padding: 0;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: #FFFFFF;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.saved-card__like-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.saved-card__time {
+    margin: 0;
+    padding: 0 0 16px 16px;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    display: flex;
+    align-items: center;
+    color: #8B8B8B;
+}
+
+.saved-card__delete-button {
+    position: relative;
+    padding: 0;
+    max-width: 30px;
+    max-height: 30px;
+    width: 100vw;
+    height: 100vh;
+    background: none;
+    border: none;
+    box-sizing: border-box;
+    background-image: url(../../images/movies-delet.svg);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: cover;
+    cursor: pointer;
+    align-self: center;
+}
+
+@media screen and (max-width: 770px) {
+    .saved-card__element {
+        max-width: 339px;
+    }
+    .saved-card__figure {
+        max-width: 339px;
+    }
+    .saved-card__image {
+        max-width: 339px;
+        max-height: 190px;
+    }
+    .saved-card__group {
+        padding: 14px 14px 15px 14px;
+    }
+    .saved-card__time {
+        padding: 0 0 14px 14px;
+    }
+}
+
+@media screen and (max-width: 370px) {
+    .saved-card__element {
+        max-width: 300px;
+    }
+    .saved-card__figure {
+        max-width: 300px;
+    }
+    .saved-card__image {
+        max-width: 300px;
+        max-height: 168px;
+    }
+    .saved-card__group {
+        padding: 14px 10px 14px 14px;
+    }
+    .saved-card__time {
+        font-size: 10px;
+        line-height: 12px;
+    }
+    .saved-card__caption {
+        font-size: 12px;
+        line-height: 15px;
+    }
+}
