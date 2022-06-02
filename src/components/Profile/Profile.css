@@ -1,7 +1,6 @@
 .profile {
     margin: 0 auto;
     max-width: 1280px;
-    /* height: 100vh; */
     background: #202020;
     font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     font-style: normal;
@@ -69,6 +68,11 @@
     border-bottom: none;
 }
 
+.profile__message {
+    font-size: 500;
+    color: #8B8B8B;
+}
+
 .profile__button {
     margin: 0;
     padding: 0;
@@ -81,11 +85,25 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: #FFFFFF;
-    cursor: pointer;
+    color: hsl(0, 0%, 100%);
+    opacity: .4;
 }
 
-.profile__button:hover {
+.profile__button_activ {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.profile__button_activ:hover {
+    opacity: .6;
+}
+
+.profile_button-exit {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.profile_button-exit:hover {
     opacity: .6;
 }
 

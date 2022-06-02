@@ -15,7 +15,7 @@ function AboutMe() {
                             техникум в 2008 году. Окончил обучение в Яндекс Практикум - “Веб-разработчик” в 2022году. У
                             меня есть жена и двое детей. Занимаюсь спортом “воздушная акробатика”.</p>
                         <ul className="student__list">
-                            <li><a className="student__link" href="/">Facebook</a></li>
+                            <li><a className="student__link" href="https://www.facebook.com/dron.swan">Facebook</a></li>
                             <li><a className="student__link" href="https://github.com/Andrey-Graf">Github</a></li>
                         </ul>
                     </div>

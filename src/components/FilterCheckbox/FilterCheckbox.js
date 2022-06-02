@@ -4,11 +4,10 @@ import './FilterCheckbox.css';
 function FilterCheckbox({ onCheckbox }) {
     const [isChecked, setIsChecked] = React.useState(false);
 
-    function onChange(e) {
+    function onChange(ev) {
         onCheckbox(!isChecked);
-        setIsChecked(e.target.value);
+        setIsChecked(ev.target.checked);
     }
-
     return (
         <div className='filter'>
             <p className='title__checkbox'>Короткометражки</p>
@@ -17,7 +16,7 @@ function FilterCheckbox({ onCheckbox }) {
                     className='filter__input'
                     type='checkbox'
                     checked={isChecked}
-                    onChange={(e) => onChange(e)}
+                    onChange={onChange}
                 />
                 <span className='filter-checkbox__slider' />
             </label>

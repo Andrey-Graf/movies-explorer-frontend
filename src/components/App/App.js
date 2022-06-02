@@ -23,6 +23,7 @@ import {
   SERVER_ERR_MESSAGE,
   USER_EMAIL_ERROR,
   UPDATE_MESSAGE,
+  ERR_UPDATE_MESSAGE,
   TOKEN_FORMAT_ERR_MESSAGE,
   TOKEN_ERR_MESSAGE,
   NOT_SAVED_ERR_MESSAGE,
@@ -34,12 +35,11 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [movies, setMovies] = React.useState([]);
-  const [isSavedMovies, setIsSavedMovies] = React.useState([]);
+  const [savedMovies, setSavedMovies] = React.useState([]);
   const [token, setToken] = React.useState('');
   const [message, setMessage] = React.useState('');
   const [isSavedMoviesLoading, setIsSavedMoviesLoading] = React.useState(true);
   const [isMoviesLoading, setIsMoviesLoading] = React.useState(false);
-  
   const [foundSavedMovies, setFoundSavedMovies] = React.useState([]);
 
   const history = useHistory();
@@ -53,6 +53,7 @@ function App() {
       mainApi.checkToken(token).then((res) => {
         if (res) {
           setIsLoggedIn(true);
+          history.push('/');
         }
       }).catch((err) => {
         if (err.status === 400) {
@@ -64,7 +65,7 @@ function App() {
         }
       });
     }
-  }, []);
+  }, [history]);
 
   React.useEffect(() => {
     tokenCheck();
@@ -73,26 +74,25 @@ function App() {
   React.useEffect(() => {
     const token = localStorage.getItem('jwt');
     if (isLoggedIn) {
-      const userLocalStorage = localStorage.getItem('currentUser');
+      mainApi.getUserInfo(token).then((userData) => {
+        setCurrentUser(userData);
+        localStorage.setItem('name', userData.name);
+        localStorage.setItem('email', userData.email);
+      })
+      .catch((err) => {
+              if (err === "500") {
+                setMessage(MOVIES_SERVER_ERR);
+              }
+              console.log(err);
+            });
+    }
+  }, [isLoggedIn])
+  
+  React.useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    if (isLoggedIn) {
       const moviesLocalStorage = localStorage.getItem('movies');
       const savedMovieLocalStorage = localStorage.getItem('savedMovies');
-
-      if (!userLocalStorage) {
-        mainApi
-          .getUserInfo(token)
-          .then((res) => {
-            localStorage.setItem('currentUser', JSON.stringify(res || {}));
-            setCurrentUser(res || {});
-          })
-          .catch((err) => {
-            if (err === "500") {
-              setMessage(MOVIES_SERVER_ERR);
-            }
-            console.log(err);
-          });
-      } else {
-        setCurrentUser(JSON.parse(userLocalStorage));
-      }
 
       if (!moviesLocalStorage) {
         moviesApi
@@ -118,7 +118,7 @@ function App() {
           .getUserMovies(token)
           .then((res) => {
             localStorage.setItem('savedMovies', JSON.stringify(res || []));
-            setIsSavedMovies(res || []);
+            setSavedMovies(res || []);
             setIsSavedMoviesLoading(false);
           })
           .catch((err) => {
@@ -128,23 +128,23 @@ function App() {
             console.log(err);
           });
       } else {
-        setIsSavedMovies(JSON.parse(savedMovieLocalStorage));
+        setSavedMovies(JSON.parse(savedMovieLocalStorage));
         setIsSavedMoviesLoading(false);
       }
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, token]);
 
   function errorMessage(message) {
     setMessage(message);
     setTimeout(() => setMessage(''), 1000);
   }
 
-// Функция регистрации пользователя.
+  // Функция регистрации пользователя.
   function handleRegister(data) {
     setIsLoading(true);
     mainApi.register(data)
       .then(() => {
-        handleAuthorize(data)
+        history.push('/signin');
       }).catch((err) => {
         if (err.status === 400) {
           errorMessage(INVALID_ERR_MESSAGE);
@@ -156,14 +156,14 @@ function App() {
       })
   }
 
+// Функция Авторизации. 
   function handleAuthorize(data) {
     setIsLoading(true);
     mainApi.authorize(data)
       .then((res) => {
-        setIsLoggedIn(true);
         localStorage.setItem('jwt', res.token);
         setToken(res.token);
-        return isLoggedIn;
+        setIsLoggedIn(true);
       }).catch((err) => {
         if (err.status === 400) {
           errorMessage(INVALID_ERR_MESSAGE);
@@ -178,10 +178,14 @@ function App() {
   // Обновить данные аккаунта
   function handleUpdateUser(data) {
     mainApi.setUserInfo(data, token).then((res) => {
-      localStorage.setItem('currentUser', JSON.stringify(res))
       setCurrentUser(res);
+      localStorage.setItem('name', res.name);
+      localStorage.setItem('email', res.email);
       errorMessage(UPDATE_MESSAGE);
     }).catch((err) => {
+      if (err) {
+        errorMessage(ERR_UPDATE_MESSAGE);
+      }
       console.log(err);
     })
   }
@@ -207,12 +211,9 @@ function App() {
     mainApi
       .saveMovies(data, token)
       .then((res) => {
-        localStorage.setItem(
-          "savedMovies",
-          JSON.stringify([res, ...isSavedMovies])
-        );
-        setIsSavedMovies([res, ...isSavedMovies]);
-        setFoundSavedMovies([res, ...isSavedMovies]);
+        localStorage.setItem("savedMovies", JSON.stringify([res, ...savedMovies]));
+        setSavedMovies([res, ...savedMovies]);
+        setFoundSavedMovies([res, ...savedMovies]);
         setMessage('');
       })
       .catch((err) => {
@@ -229,7 +230,7 @@ function App() {
       resetMessage();
       return;
     }
-    const savedMovieSearchResult = isSavedMovies.filter((item) => {
+    const savedMovieSearchResult = savedMovies.filter((item) => {
       return item.nameRU.toLowerCase().includes(searchTerm);
     });
     if (savedMovieSearchResult.length === 0) {
@@ -248,12 +249,12 @@ function App() {
     return shortMoviesArray;
   }
 
-// Функция удаления карточки.
+  // Функция удаления карточки.
   function handleMovieDelete(movie) {
-    const savedMovie = isSavedMovies.find((e) => e.movieId === movie.id);
-    const newSaveMovie = (isSavedMovies.filter((i) => i._id !== savedMovie._id));
+    const savedMovie = savedMovies.find((e) => e.movieId === movie.id);
+    const newSaveMovie = (savedMovies.filter((i) => i._id !== savedMovie._id));
     mainApi.deleteMovies(savedMovie._id, token).then(() => {
-      setIsSavedMovies(newSaveMovie);
+      setSavedMovies(newSaveMovie);
       setFoundSavedMovies(newSaveMovie);
       localStorage.setItem("savedMovies", JSON.stringify(newSaveMovie));
     }).catch((err) => {
@@ -261,7 +262,7 @@ function App() {
     })
   }
 
-// Выйти из аккаунта
+  // Выйти из аккаунта
   function handleSignOut() {
     mainApi
       .signOut()
@@ -294,7 +295,7 @@ function App() {
           component={Movies}
           movies={movies}
           searchMovie={handleMovieSearch}
-          savedMovies={isSavedMovies}
+          savedMovies={savedMovies}
           isLoading={isMoviesLoading}
           movieSave={handleMovieLike}
           movieUnSave={handleMovieDelete}
@@ -306,7 +307,7 @@ function App() {
           message={message}
           component={SavedMovies}
           isLoading={isSavedMoviesLoading}
-          savedMovies={isSavedMovies}
+          savedMovies={savedMovies}
           foundSavedMovies={foundSavedMovies}
           movieUnSave={handleMovieDelete}
           searchSavedMovie={handleSavedMovieSearch}
@@ -325,29 +326,29 @@ function App() {
           {isLoggedIn ? (
             <Redirect to='/signin' />
           ) : (
-              <Register
-                onRegister={handleRegister}
-                isLoading={isLoading}
-                message={message}
-              />
+            <Register
+              onRegister={handleRegister}
+              isLoading={isLoading}
+              message={message}
+            />
           )}
         </Route>
         <Route path='/signin'>
           {isLoggedIn ? (
             <Redirect to='/movies' />
           ) : (
-              <Login
-                onLogin={handleAuthorize}
-                isLoading={isLoading}
-              />
+            <Login
+              onLogin={handleAuthorize}
+              isLoading={isLoading}
+            />
           )}
         </Route>
         <Route path='*'>
-          <NotFound loggedIn={isLoggedIn}/>
+          <NotFound loggedIn={isLoggedIn} />
         </Route>
       </Switch>
     </CurrentUserContext.Provider>
-  )
+  );
 }
 
 export default App;

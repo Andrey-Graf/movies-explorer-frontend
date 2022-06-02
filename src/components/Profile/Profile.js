@@ -7,51 +7,18 @@ import { useFormWithValidation } from "../../utils/Validation";
 
 function Profile(props) {
     const currentUser = React.useContext(CurrentUserContext);
-    const [formDisable, setformDisable] = React.useState(true);
-    const { values, handleChange, errors, setValues, setIsValid } = useFormWithValidation();
-
-    // const [isLoginData, setIsLoginData] = React.useState({
-    //     name: currentUser.name,
-    //     email: currentUser.email,
-    // });
-
-    // React.useEffect(() => {
-    //     if (currentUser) {
-    //         resetForm(currentUser, {}, true);
-    //     }
-    // }, [currentUser, resetForm]);
-
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setIsLoginData({
-    //         ...isLoginData,
-    //         [name]: value,
-    //     });
-    // };
-
-    function disableBtn(e) {
-        e.preventDefault();
-        setformDisable(false);
-    }
+    const { values, handleChange, errors, setValues, isValid, setIsValid } = useFormWithValidation();
 
     function handleSubmit(e) {
         e.preventDefault();
-        props.onEditProfile(values.name, values.email);
+        const { name, email } = values
+        props.onEditProfile({ name, email });
     }
 
     React.useEffect(() => {
         setValues(currentUser);
-    }, [currentUser, setValues]);
-
-    React.useEffect(() => {
-        if (props.isLoading) {
-            setformDisable(true);
-        }
-    }, [props.isLoading]);
-
-    React.useEffect(() => {
-        setformDisable(props.isSuccess);
-    }, [props.isSuccess, props.userInfo]);
+        setIsValid(true);
+    }, [currentUser, setValues, setIsValid]);
 
     React.useEffect(() => {
         if (values.name === currentUser.name && values.email === currentUser.email) {
@@ -60,8 +27,9 @@ function Profile(props) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [values]);
 
-    const profileMessageClassName = (`profile__message ${props.isSuccess ? 'profile__message-success' : 'profile__message-error'}`)
-
+    const buttonClassName = ((isValid && (values.name !== currentUser.name || values.email !== currentUser.email)) ? 'profile__button profile__button_activ' : 'profile__button')
+    const buttonDisable = ((values.name === currentUser.name && values.email === currentUser.email) || !isValid);
+    
     return (
         <section className="profile">
             <HeaderMovies loggedIn={props.loggedIn}/>
@@ -74,34 +42,30 @@ function Profile(props) {
                             <input
                                 value={values.name || ''}
                                 onChange={handleChange}
-                                disabled={formDisable}
                                 type="name"
                                 name="name"
-                                id="profile-name"
                                 className="input__text form__input_theme_dark"
                                 minLength="2"
                                 maxLength="30"
                                 required
                                 autoComplete="off" />
                         </div>
-                        <span className="form__input-error" id="login-name-error">{errors.name}</span>
+                        <span className="form__input-error">{errors.name}</span>
                         <div className="input__block">
                             <p className="profile__input-title">Почта</p>
                             <input
                                 value={values.email || ''}
                                 onChange={handleChange}
-                                disabled={formDisable}
                                 type="email"
                                 name="email"
-                                id="profile-email"
                                 className="input__text form__input_theme_dark"
                                 required
                                 autoComplete="off" />
                         </div>
-                        <span className="form__input-error" id="profile-email-error">{errors.email}</span>
-                        <span className={profileMessageClassName}>{props.message}</span>
+                        <span className="form__input-error">{errors.email}</span>
+                        <span className='profile__message'>{props.message}</span>
                     </div>
-                    <button className="profile__button" type="submit" onClick={disableBtn}>
+                    <button className={buttonClassName} type="submit" disabled={buttonDisable}>
                         Редактировать
                     </button>
                     <Link to="/" className="profile__btn-link">

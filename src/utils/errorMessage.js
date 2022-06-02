@@ -5,6 +5,7 @@ const AUTH_ERR_MESSAGE = 'Неверный логин или пароль';
 const SERVER_ERR_MESSAGE = 'На сервере произошла ошибка';
 const USER_EMAIL_ERROR = 'Пользователь с таким email уже существует';
 const UPDATE_MESSAGE = 'Данные успешно обновлены';
+const ERR_UPDATE_MESSAGE = 'Ошибка при изменении данных';
 const TOKEN_FORMAT_ERR_MESSAGE = '400 — Токен не передан или передан не в том формате';
 const TOKEN_ERR_MESSAGE = '401 — Переданный токен некорректен';
 const NOT_SAVED_ERR_MESSAGE = 'Невозможно сохранить карточку с фильмом. Код ошибки';
@@ -18,6 +19,7 @@ export {
     SERVER_ERR_MESSAGE,
     USER_EMAIL_ERROR,
     UPDATE_MESSAGE,
+    ERR_UPDATE_MESSAGE,
     TOKEN_FORMAT_ERR_MESSAGE,
     TOKEN_ERR_MESSAGE,
     NOT_SAVED_ERR_MESSAGE,

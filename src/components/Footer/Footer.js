@@ -10,8 +10,8 @@ function Footer() {
                     <p className="footer__yers">&copy; 2022</p>
                     <ul className="footer__links">
                         <li><a href="https://practicum.yandex.ru/" className="footer__link">Яндекс.Практикум</a></li>
-                        <li><a href="/" className="footer__link">Github</a></li>
-                        <li><a href="/" className="footer__link">Facebook</a></li>
+                        <li><a href="https://github.com/Andrey-Graf" className="footer__link">Github</a></li>
+                        <li><a href="https://www.facebook.com/dron.swan" className="footer__link">Facebook</a></li>
                     </ul>
                 </nav>
             </div>

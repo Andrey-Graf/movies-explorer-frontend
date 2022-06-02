@@ -1,6 +1,6 @@
 import React from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import IconSearch from '../../images/button-search.svg'
+import IconSearch from '../../images/button-search.svg';
 import './SearchForm.css';
 
 function SearchForm({ searchMovie, setIsChecked }) {
@@ -38,18 +38,16 @@ function SearchForm({ searchMovie, setIsChecked }) {
                     <div className='search__input-block'>
                         <input
                             className='search__input'
-                            value={searchText}
+                            value={searchText || ''}
                             onChange={onChange}
                             type="text"
                             name="movi"
-                            id="search-movi"
                             placeholder="Фильм"
                             autoComplete="off"
-                            minLength="2"
                             maxLength="200"
                             required
                         />
-                        <span className="form__input-error" id="profile-movi-error">{error}</span>
+                        <span className="form__input-error">{error}</span>
                         <button className='search__button' type='submit'><img className='search__icon' src={IconSearch} alt='поиск' /></button>
                     </div>
                     <FilterCheckbox onCheckbox={onCheckbox}/>
