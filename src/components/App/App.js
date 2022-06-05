@@ -213,43 +213,6 @@ function App() {
     }
   }
 
-  // const handleMovieSearch = (word) => {
-  //   setIsLoading(true);
-  //   setMovies([]);
-  //   setNotMovies(false);
-
-  //   if (movies.length === 0) {
-  //     moviesApi.getMovies().then((movies) => {
-  //       setMovies(movies)
-  //       const searchResult = sortShortMovies(movies, word)
-  //       if (searchResult.length === 0) {
-  //         setNotMovies(false);
-  //         setMovies([]);
-  //       } else {
-  //         localStorage.setItem('movies', JSON.stringify(searchResult));
-  //         setMovies(JSON.parse(localStorage.getItem('movies')));
-  //         setNotMovies(false);
-  //       }
-  //     }).catch((err) => {
-  //       console.log(err);
-  //     }).finally(() => {
-  //       setIsLoading(false);
-  //     })
-  //   } else {
-  //     const searchResult = sortShortMovies(movies, word);
-  //     if (searchResult.length === 0) {
-  //       setNotMovies(true);
-  //       setMovies([]);
-  //       setIsLoading(false);
-  //     } else if (searchResult.length !== 0) {
-  //       localStorage.setItem('movies', JSON.stringify(searchResult));
-  //       setMovies(JSON.parse(localStorage.getItem('movies')));
-  //       setIsLoading(false);
-  //       setNotMovies(false);
-  //     }
-  //   }
-  // }
-
   // Сохранить фильм
   function handleMovieLike(data) {
     mainApi
