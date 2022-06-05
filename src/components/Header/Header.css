@@ -8,9 +8,9 @@
 
 .header__nav {
     padding: 18px 70px;
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; */
 }
 
 @media screen and (max-width: 769px) {

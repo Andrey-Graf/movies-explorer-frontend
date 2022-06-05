@@ -2,23 +2,20 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import './NotFound.css';
 
-function NotFound({ loggedIn }) {
+function NotFound() {
     const history = useHistory();
 
-    function handleClick() {
-        if (loggedIn) {
-            history.goBack();
-        } else {
-            history.push("/");
-        }
-    }
+    const handleGoBackBtnClick = () => {
+        history.goBack();
+    };
+
     return (
         <div className='not-found'>
             <h3 className='not-found note-found__title'>
                 <span className='note-found__number'>404</span>
                 Страница не найдена
             </h3>
-            <button className='button button__back' onClick={handleClick}>
+            <button className='button button__back' onClick={handleGoBackBtnClick}>
                 Назад
             </button>
         </div>

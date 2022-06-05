@@ -32,7 +32,6 @@ function Login(props) {
                     title="Рады видеть!"
                     buttonText="Войти"
                     onSubmit={handleSubmit}
-                    isLoading={props.isLoading}
                     isValid={isValid}
                     link={link}
                 >
@@ -45,6 +44,7 @@ function Login(props) {
                         className="form__text form__text_theme_dark"
                         required
                         autoComplete="off"
+                        pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$"
                     />
                     <span className="form__input-error">{errors.email}</span>
                     <p className="form__input-title">Пароль</p>

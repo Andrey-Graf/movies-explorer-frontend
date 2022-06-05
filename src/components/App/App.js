@@ -41,6 +41,7 @@ function App() {
   const [isSavedMoviesLoading, setIsSavedMoviesLoading] = React.useState(true);
   const [isMoviesLoading, setIsMoviesLoading] = React.useState(false);
   const [foundSavedMovies, setFoundSavedMovies] = React.useState([]);
+  const [notMovies, setNotMovies] = React.useState([]);
 
   const history = useHistory();
 
@@ -140,11 +141,12 @@ function App() {
   }
 
   // Функция регистрации пользователя.
-  function handleRegister(data) {
+  function handleRegister(email, password, name) {
     setIsLoading(true);
-    mainApi.register(data)
+    mainApi.register(email, password, name)
       .then(() => {
-        history.push('/signin');
+        errorMessage('');
+        handleAuthorize(email, password);
       }).catch((err) => {
         if (err.status === 400) {
           errorMessage(INVALID_ERR_MESSAGE);
@@ -153,17 +155,20 @@ function App() {
         } else if (err.status === 500) {
           errorMessage(SERVER_ERR_MESSAGE);
         }
-      })
+      }).finally(() => {
+        setIsLoading(false);
+      });
   }
 
 // Функция Авторизации. 
-  function handleAuthorize(data) {
+  function handleAuthorize(email, password) {
     setIsLoading(true);
-    mainApi.authorize(data)
+    mainApi.authorize(email, password)
       .then((res) => {
         localStorage.setItem('jwt', res.token);
         setToken(res.token);
         setIsLoggedIn(true);
+        errorMessage('');
       }).catch((err) => {
         if (err.status === 400) {
           errorMessage(INVALID_ERR_MESSAGE);
@@ -172,7 +177,9 @@ function App() {
         } else if (err.status === 500) {
           errorMessage(SERVER_ERR_MESSAGE);
         }
-      })
+      }).finally(() => {
+        setIsLoading(false);
+      });
   }
 
   // Обновить данные аккаунта
@@ -199,12 +206,49 @@ function App() {
     });
     if (searchResult.length === 0) {
       setMessage(MOVIES_NOT_FOUND);
-      setMovies([]);
+      setNotMovies([]);
     } else {
-      setMovies(searchResult);
+      setNotMovies(searchResult);
       resetMessage();
     }
   }
+
+  // const handleMovieSearch = (word) => {
+  //   setIsLoading(true);
+  //   setMovies([]);
+  //   setNotMovies(false);
+
+  //   if (movies.length === 0) {
+  //     moviesApi.getMovies().then((movies) => {
+  //       setMovies(movies)
+  //       const searchResult = sortShortMovies(movies, word)
+  //       if (searchResult.length === 0) {
+  //         setNotMovies(false);
+  //         setMovies([]);
+  //       } else {
+  //         localStorage.setItem('movies', JSON.stringify(searchResult));
+  //         setMovies(JSON.parse(localStorage.getItem('movies')));
+  //         setNotMovies(false);
+  //       }
+  //     }).catch((err) => {
+  //       console.log(err);
+  //     }).finally(() => {
+  //       setIsLoading(false);
+  //     })
+  //   } else {
+  //     const searchResult = sortShortMovies(movies, word);
+  //     if (searchResult.length === 0) {
+  //       setNotMovies(true);
+  //       setMovies([]);
+  //       setIsLoading(false);
+  //     } else if (searchResult.length !== 0) {
+  //       localStorage.setItem('movies', JSON.stringify(searchResult));
+  //       setMovies(JSON.parse(localStorage.getItem('movies')));
+  //       setIsLoading(false);
+  //       setNotMovies(false);
+  //     }
+  //   }
+  // }
 
   // Сохранить фильм
   function handleMovieLike(data) {
@@ -234,7 +278,7 @@ function App() {
       return item.nameRU.toLowerCase().includes(searchTerm);
     });
     if (savedMovieSearchResult.length === 0) {
-      setMessage(MOVIES_SERVER_ERR);
+      setMessage(MOVIES_NOT_FOUND);
       setFoundSavedMovies([]);
     } else {
       setFoundSavedMovies(savedMovieSearchResult);
@@ -285,7 +329,7 @@ function App() {
       <Switch>
         <Route exact path='/'>
           <Main
-            loggedIn={isLoggedIn}
+            isLoggedIn={isLoggedIn}
           />
         </Route>
         <ProtectedRoute
@@ -293,7 +337,7 @@ function App() {
           loggedIn={isLoggedIn}
           message={message}
           component={Movies}
-          movies={movies}
+          movies={notMovies}
           searchMovie={handleMovieSearch}
           savedMovies={savedMovies}
           isLoading={isMoviesLoading}
@@ -324,7 +368,7 @@ function App() {
         />
         <Route path='/signup'>
           {isLoggedIn ? (
-            <Redirect to='/signin' />
+            <Redirect to='/movies' />
           ) : (
             <Register
               onRegister={handleRegister}
@@ -344,7 +388,7 @@ function App() {
           )}
         </Route>
         <Route path='*'>
-          <NotFound loggedIn={isLoggedIn} />
+          <NotFound/>
         </Route>
       </Switch>
     </CurrentUserContext.Provider>

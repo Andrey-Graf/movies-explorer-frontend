@@ -4,20 +4,23 @@ import Logo from '../Logo/Logo';
 import Icon from '../../images/profile-icon.svg';
 import './Navigation.css';
 
-function Navigation(props) {
+function Navigation({ isLoggedIn }) {
     return (
         <>
-            {!props.loggedIn && (
+            {!isLoggedIn && (
                 <div className="header__menu">
-                    <Link className="link header__link" to="/signup">Регистрация</Link>
-                    <Link to="/signin">
-                        <button className="header__button" type="submit">
-                            Войти
-                        </button>
-                    </Link>
+                    <Logo />
+                    <div className='header__block'>
+                        <Link className="link header__link" to="/signup">Регистрация</Link>
+                        <Link to="/signin">
+                            <button className="header__button" type="submit">
+                                Войти
+                            </button>
+                        </Link>
+                    </div>
                 </div>
             )}
-            {props.loggedIn && (
+            {isLoggedIn && (
                 <div className='movies__menu'>
                     <div className='movies__nav'>
                         <Logo />

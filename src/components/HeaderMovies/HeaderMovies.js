@@ -7,7 +7,7 @@ function HeaderMovies({ loggedIn }) {
     return (
         <div className='movies__header'>
             <Navigation
-                loggedIn={loggedIn}
+                isLoggedIn={loggedIn}
             />
             <NavigationMobil
                 loggedIn={loggedIn}
