@@ -42,6 +42,7 @@ function App() {
   const [isMoviesLoading, setIsMoviesLoading] = React.useState(false);
   const [foundSavedMovies, setFoundSavedMovies] = React.useState([]);
   const [notMovies, setNotMovies] = React.useState([]);
+  const [isDataLoading, setIsDataLoading] = React.useState(true);
 
   const history = useHistory();
 
@@ -54,7 +55,7 @@ function App() {
       mainApi.checkToken(token).then((res) => {
         if (res) {
           setIsLoggedIn(true);
-          history.push('/');
+          setIsDataLoading(false);
         }
       }).catch((err) => {
         if (err.status === 400) {
@@ -66,7 +67,7 @@ function App() {
         }
       });
     }
-  }, [history]);
+  }, []);
 
   React.useEffect(() => {
     tokenCheck();
@@ -80,15 +81,15 @@ function App() {
         localStorage.setItem('name', userData.name);
         localStorage.setItem('email', userData.email);
       })
-      .catch((err) => {
-              if (err === "500") {
-                setMessage(MOVIES_SERVER_ERR);
-              }
-              console.log(err);
-            });
+        .catch((err) => {
+          if (err === "500") {
+            setMessage(MOVIES_SERVER_ERR);
+          }
+          console.log(err);
+        });
     }
   }, [isLoggedIn])
-  
+
   React.useEffect(() => {
     const token = localStorage.getItem('jwt');
     if (isLoggedIn) {
@@ -97,7 +98,7 @@ function App() {
 
       if (!moviesLocalStorage) {
         moviesApi
-          .getMovies(token)
+          .getMovies()
           .then((res) => {
             localStorage.setItem('movies', JSON.stringify(res || []));
             setMovies(res || []);
@@ -160,7 +161,7 @@ function App() {
       });
   }
 
-// Функция Авторизации. 
+  // Функция Авторизации. 
   function handleAuthorize(email, password) {
     setIsLoading(true);
     mainApi.authorize(email, password)
@@ -200,7 +201,7 @@ function App() {
   //Поиск фильмов
   function handleMovieSearch(query) {
     const searchMovie = query.toLowerCase();
-
+    
     const searchResult = movies.filter((item) => {
       return item.nameRU.toLowerCase().includes(searchMovie);
     });
@@ -208,7 +209,8 @@ function App() {
       setMessage(MOVIES_NOT_FOUND);
       setNotMovies([]);
     } else {
-      setNotMovies(searchResult);
+      localStorage.setItem('searchMovies', JSON.stringify(searchResult));
+      setNotMovies(JSON.parse(localStorage.getItem('searchMovies')));
       resetMessage();
     }
   }
@@ -218,7 +220,7 @@ function App() {
     mainApi
       .saveMovies(data, token)
       .then((res) => {
-        localStorage.setItem("savedMovies", JSON.stringify([res, ...savedMovies]));
+        localStorage.setItem('savedMovies', JSON.stringify([res, ...savedMovies]));
         setSavedMovies([res, ...savedMovies]);
         setFoundSavedMovies([res, ...savedMovies]);
         setMessage('');
@@ -243,9 +245,11 @@ function App() {
     if (savedMovieSearchResult.length === 0) {
       setMessage(MOVIES_NOT_FOUND);
       setFoundSavedMovies([]);
+      setIsSavedMoviesLoading(false);
     } else {
       setFoundSavedMovies(savedMovieSearchResult);
       resetMessage();
+      setIsSavedMoviesLoading(false);
     }
   }
 
@@ -263,7 +267,7 @@ function App() {
     mainApi.deleteMovies(savedMovie._id, token).then(() => {
       setSavedMovies(newSaveMovie);
       setFoundSavedMovies(newSaveMovie);
-      localStorage.setItem("savedMovies", JSON.stringify(newSaveMovie));
+      localStorage.setItem('savedMovies', JSON.stringify(newSaveMovie));
     }).catch((err) => {
       console.log(err);
     })
@@ -279,6 +283,7 @@ function App() {
         localStorage.removeItem('movies');
         localStorage.removeItem('savedMovies');
         localStorage.removeItem('currentUser');
+        localStorage.removeItem('searchMovies');
         setToken('');
         history.push('/');
       })
@@ -307,6 +312,7 @@ function App() {
           movieSave={handleMovieLike}
           movieUnSave={handleMovieDelete}
           sortShortMovies={sortShortMovies}
+          isDataLoading={isDataLoading}
         />
         <ProtectedRoute
           path='/saved-movies'
@@ -319,6 +325,7 @@ function App() {
           movieUnSave={handleMovieDelete}
           searchSavedMovie={handleSavedMovieSearch}
           sortShortMovies={sortShortMovies}
+          isDataLoading={isDataLoading}
         />
         <ProtectedRoute
           path='/profile'
@@ -328,6 +335,7 @@ function App() {
           component={Profile}
           onEditProfile={handleUpdateUser}
           onSignOut={handleSignOut}
+          isDataLoading={isDataLoading}
         />
         <Route path='/signup'>
           {isLoggedIn ? (
@@ -351,7 +359,7 @@ function App() {
           )}
         </Route>
         <Route path='*'>
-          <NotFound/>
+          <NotFound loggedIn={isLoggedIn} />
         </Route>
       </Switch>
     </CurrentUserContext.Provider>
