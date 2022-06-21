@@ -24,7 +24,7 @@ function SearchForm({ searchMovie, setIsChecked }) {
     function handleSubmit(e) {
         e.preventDefault();
 
-        if (!searchMovie) {
+        if (!searchText) {
             setError('Нужно ввести ключевое слово');
             return;
         }
