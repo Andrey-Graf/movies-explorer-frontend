@@ -41,7 +41,7 @@ function App() {
   const [isSavedMoviesLoading, setIsSavedMoviesLoading] = React.useState(true);
   const [isMoviesLoading, setIsMoviesLoading] = React.useState(false);
   const [foundSavedMovies, setFoundSavedMovies] = React.useState([]);
-  const [notMovies, setNotMovies] = React.useState([]);
+  const [foundMovies, setFoundMovies] = React.useState([]);
   const [isDataLoading, setIsDataLoading] = React.useState(true);
 
   const history = useHistory();
@@ -93,27 +93,7 @@ function App() {
   React.useEffect(() => {
     const token = localStorage.getItem('jwt');
     if (isLoggedIn) {
-      const moviesLocalStorage = localStorage.getItem('movies');
       const savedMovieLocalStorage = localStorage.getItem('savedMovies');
-
-      if (!moviesLocalStorage) {
-        moviesApi
-          .getMovies()
-          .then((res) => {
-            localStorage.setItem('movies', JSON.stringify(res || []));
-            setMovies(res || []);
-            setIsMoviesLoading(false);
-          })
-          .catch((err) => {
-            if (err === "500") {
-              setMessage(MOVIES_SERVER_ERR);
-            }
-            console.log(err);
-          });
-      } else {
-        setMovies(JSON.parse(moviesLocalStorage));
-        setIsMoviesLoading(false);
-      }
 
       if (!savedMovieLocalStorage) {
         mainApi
@@ -170,6 +150,7 @@ function App() {
         setToken(res.token);
         setIsLoggedIn(true);
         errorMessage('');
+        history.push('/movies');
       }).catch((err) => {
         if (err.status === 400) {
           errorMessage(INVALID_ERR_MESSAGE);
@@ -179,6 +160,7 @@ function App() {
           errorMessage(SERVER_ERR_MESSAGE);
         }
       }).finally(() => {
+        setIsDataLoading(false);
         setIsLoading(false);
       });
   }
@@ -200,19 +182,48 @@ function App() {
 
   //Поиск фильмов
   function handleMovieSearch(query) {
+    setIsLoading(true);
+    setMovies([]);
+    setIsMoviesLoading(false);
     const searchMovie = query.toLowerCase();
-    
-    const searchResult = movies.filter((item) => {
-      return item.nameRU.toLowerCase().includes(searchMovie);
-    });
-    if (searchResult.length === 0) {
-      setMessage(MOVIES_NOT_FOUND);
-      setNotMovies([]);
-    } else {
-      localStorage.setItem('searchMovies', JSON.stringify(searchResult));
-      setNotMovies(JSON.parse(localStorage.getItem('searchMovies')));
-      resetMessage();
-    }
+      if(foundMovies.length === 0) {
+        moviesApi.getMovies()
+          .then((movies) => {
+            setFoundMovies(movies)
+              const searchResult = movies.filter((item) => {
+                return item.nameRU.toLowerCase().includes(searchMovie);
+              });
+            if (searchResult.length === 0) {
+                setMessage(MOVIES_NOT_FOUND);
+                setMovies([]);
+              } else {
+                localStorage.setItem('movies', JSON.stringify(searchResult))
+                setMovies(JSON.parse(localStorage.getItem('movies')));
+              setIsMoviesLoading(false);
+              setMessage('');
+              }})
+          .catch((err) => {
+            console.log(`Ошибка ${err}, попробуйте еще раз`)
+          })
+          .finally(() => {
+            setIsLoading(false);
+          })
+      } else {
+        const searchResult = movies.filter((item) => {
+          return item.nameRU.toLowerCase().includes(searchMovie);
+        });
+        if (searchResult.length === 0) {
+          setMessage(MOVIES_NOT_FOUND);
+          setMovies([]);
+          setIsLoading(false);
+        } else if(searchResult.length !== 0) {
+          localStorage.setItem('movies', JSON.stringify(searchResult));
+          setMovies(JSON.parse(localStorage.getItem('movies')));
+          setIsLoading(false);
+          setIsMoviesLoading(false);
+          setMessage('');
+        }
+      }
   }
 
   // Сохранить фильм
@@ -279,12 +290,11 @@ function App() {
       .signOut()
       .then(() => {
         setIsLoggedIn(false);
-        localStorage.removeItem('jwt');
-        localStorage.removeItem('movies');
-        localStorage.removeItem('savedMovies');
-        localStorage.removeItem('currentUser');
-        localStorage.removeItem('searchMovies');
+        localStorage.clear();
         setToken('');
+        setCurrentUser('');
+        setMovies([]);
+        setFoundMovies([]);
         history.push('/');
       })
       .catch((err) => {
@@ -305,7 +315,7 @@ function App() {
           loggedIn={isLoggedIn}
           message={message}
           component={Movies}
-          movies={notMovies}
+          movies={movies}
           searchMovie={handleMovieSearch}
           savedMovies={savedMovies}
           isLoading={isMoviesLoading}

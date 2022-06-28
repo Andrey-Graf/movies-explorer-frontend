@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './NavigationMobil.css';
 import Logo from '../Logo/Logo';
 import Icon from '../../images/profile-icon.svg';
@@ -33,9 +33,9 @@ function NavigationMobil(props) {
                             onClick={handleCloseMenu}
                         />
                         <div className='mobil__block'>
-                            <Link className='link mobil__link' to='/'>Главная</Link>
-                            <Link className='link mobil__link' to='/movies'>Фильмы</Link>
-                            <Link className='link mobil__link' to='/saved-movies'>Сохранённые фильмы</Link>
+                            <NavLink className='link mobil__link' activeClassName='mobil__link-activ' exact to='/'>Главная</NavLink>
+                            <NavLink className='link mobil__link' activeClassName='mobil__link-activ' to='/movies'>Фильмы</NavLink>
+                            <NavLink className='link mobil__link' activeClassName='mobil__link-activ' to='/saved-movies'>Сохранённые фильмы</NavLink>
                             <div className='mobil__profile'>
                                 <Link className='link link__profile' to='/profile'>
                                     <button className='link__button' type='button'>

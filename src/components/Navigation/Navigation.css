@@ -76,6 +76,10 @@
     margin: 0;
 }
 
+.movies__link_activ {
+    text-decoration: underline;
+}
+
 .link__button {
     padding: 0;
     margin: 0;

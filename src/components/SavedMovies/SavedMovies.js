@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import HeaderMovies from '../HeaderMovies/HeaderMovies';
-import SearchForm from '../SearchForm/SearchForm';
+import SearchFormSaved from '../SearchFormSaved/SearchFormSaved';
 import SavedCardList from '../SavedCardList/SavedCardList';
 import Footer from '../Footer/Footer';
 import './SavedMovies.css';
@@ -33,7 +33,7 @@ function SavedMovies({
     return (
         <section className='saved-movies'>
             <HeaderMovies loggedIn={loggedIn} />
-            <SearchForm
+            <SearchFormSaved
                 searchMovie={searchSavedMovie}
                 setIsChecked={setIsChecked}
             />
