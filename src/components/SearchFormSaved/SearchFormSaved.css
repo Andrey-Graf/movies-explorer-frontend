@@ -1,0 +1,109 @@
+.search {
+    padding: 80px 70px 10px 70px;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-style: normal;
+}
+
+.search__conteiner {
+    margin: 0 auto;
+    padding-bottom: 83px;
+    border-bottom: 1px solid rgba(170, 170, 170, .2);
+}
+
+.search__form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0 auto;
+    background: none;
+    box-shadow: 0 0 14px rgba(0, 0, 0, 0.08);
+    border-radius: 9px;
+}
+
+.search__input-block {
+    max-width: 932px;
+    width: 100%;
+    margin-right: 41px;
+    padding: 5.5px 5.5px 5.5px 20.5px;
+    border: 1.5px solid rgba(170, 170, 170, .2);
+    border-radius: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-self: center;
+}
+
+.search__input {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    border: none;
+    background-color: unset;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: #8B8B8B;
+}
+
+.search__button {
+    width: 80px;
+    height: 34px;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.search__button:hover {
+    opacity: .6;
+}
+
+.search__icon {
+    width: 80px;
+    height: 34px;
+    color: #FFFFFF;
+    padding: 0;
+    object-fit: cover;
+}
+
+.form__input-error {
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    margin-top: 6px;
+    color: #EE3465;
+}
+
+@media screen and (max-width: 770px) {
+    .search {
+        padding: 60px 30px 10px 30px;
+    }
+    .search__conteiner {
+        padding-bottom: 57px;
+    }
+    .search__form {
+        flex-direction: column;
+        align-items: center;
+    }
+    .search__input-block {
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 370px) {
+    .search {
+        padding: 60px 10px 10px 10px;
+    }
+    .search__input-block {
+        padding-left: 14.5px;
+        max-width: 277px;
+    }
+    .search__input {
+        font-size: 11px;
+    }
+    .search__conteiner {
+        padding-bottom: 44px;
+    }
+}

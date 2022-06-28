@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import Icon from '../../images/profile-icon.svg';
 import './Navigation.css';
@@ -25,8 +25,8 @@ function Navigation({ isLoggedIn }) {
                     <div className='movies__nav'>
                         <Logo />
                         <div className='movies__block'>
-                            <Link className='link movies__link' to='/movies'>Фильмы</Link>
-                            <Link className='link movies__link' to='/saved-movies'>Сохранённые фильмы</Link>
+                            <NavLink className='link movies__link' activeClassName='movies__link_activ' to='/movies'>Фильмы</NavLink>
+                            <NavLink className='link movies__link' activeClassName='movies__link_activ' to='/saved-movies'>Сохранённые фильмы</NavLink>
                         </div>
                     </div>
                     <div className='movies__profile'>

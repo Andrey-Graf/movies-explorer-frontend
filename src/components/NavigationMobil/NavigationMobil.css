@@ -79,9 +79,7 @@
 }
 
 .mobil__link-activ {
-    border-bottom: 2px solid #FFFFFF;
-    padding: 0;
-    box-sizing: border-box;
+    text-decoration: underline;
 }
 
 .mobil__profile {

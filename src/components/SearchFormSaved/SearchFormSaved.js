@@ -2,14 +2,14 @@
 import React from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import IconSearch from '../../images/button-search.svg';
-import './SearchForm.css';
+import './SearchFormSaved.css';
 
 
-function SearchForm({ searchMovie, setIsChecked }) {
+function SearchFormSaved({ searchMovie, setIsChecked }) {
     const [searchText, setSearchText] = React.useState('');
     const [shortMovies, setShortMovies] = React.useState(false);
     const [error, setError] = React.useState('');
-
+    
 
     React.useEffect(() => {
         setError('');
@@ -26,20 +26,17 @@ function SearchForm({ searchMovie, setIsChecked }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-
-        if (!searchText) {
+        
+        if (searchText.length === 0) {
             setError('Нужно ввести ключевое слово');
-            setTimeout(() => {
-                setError('');
-            }, 2000);
-        } else if (searchText) {
-            localStorage.setItem('searchText', searchText);
+            return;
+        } else {
             searchMovie(searchText);
         }
+        
     }
 
     React.useEffect(() => {
-        setSearchText(localStorage.getItem('searchText'));
         searchMovie(searchText);
     }, [])
 
@@ -62,11 +59,11 @@ function SearchForm({ searchMovie, setIsChecked }) {
                         <span className="form__input-error">{error}</span>
                         <button className='search__button' type='submit'><img className='search__icon' src={IconSearch} alt='поиск' /></button>
                     </div>
-                    <FilterCheckbox onCheckbox={onCheckbox} />
+                    <FilterCheckbox onCheckbox={onCheckbox}/>
                 </form>
             </div>
         </section>
     )
 }
 
-export default SearchForm;
+export default SearchFormSaved;
